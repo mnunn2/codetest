@@ -7,8 +7,12 @@ use Fred\Order;
 setlocale(LC_MONETARY, 'en_UK');
 
 $orderNumber = 'fyi-12346'; // sourced from sanitezed user input
+try {
+    $order = new Order($orderNumber);
+    $lines = $order->getOrderLines();
+    require 'view/order_view.php';
+}
+catch(Exception $e) {
+  echo 'Message: ' .$e->getMessage();
+}
 
-$order = new Order($orderNumber);
-$lines = $order->getOrderLines();
-
-require 'view/order_view.php';

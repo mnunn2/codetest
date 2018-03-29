@@ -12,6 +12,11 @@ class Order
     public $grandTotalForItems;
     private $orderLines = []; //array of order line objects
 
+    /**
+     * Order constructor.
+     * @param string $orderID
+     * @throws \Exception
+     */
     public function __construct(string $orderID)
     {
         $orderIDMatchPattern = '/^[a-zA-Z]{3}-[0-9]{5}$/';
