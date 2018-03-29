@@ -1,4 +1,4 @@
-To run tests use the following: vendor/bin/phpunit -c tests/phpunit.xml tests
+To run tests use the following from project root: vendor/bin/phpunit -c tests/phpunit.xml tests
 
 I haven't really tried a TDD approach before but found it gave reassurance when making changes.
 Although there was some experimentation going on which slowed me down a bit.
