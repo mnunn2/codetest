@@ -1,0 +1,19 @@
+{
+    "name": "mike/foo",
+    "description": "test",
+    "type": "project",
+    "authors": [
+        {
+            "name": "mike nunn",
+            "email": "mike@karuna.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+	"autoload": {
+		"psr-4": {"Fred\\": "src/"}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^7"
+	}
+}
