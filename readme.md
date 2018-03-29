@@ -23,4 +23,5 @@ The tests need to be expanded and made more rigorous.
 
 Settle on a style for class attribute declaration. 
 
+Add docblocks 
 
