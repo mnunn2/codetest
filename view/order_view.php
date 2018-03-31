@@ -9,8 +9,8 @@
         <div class="grid-container">
             <div class="grid-item grid-background"></div>
             <div class="grid-item" id="orderHeader">
-                <h2><?php echo "Order Number: $order->orderID"; ?></h2>
-                <p><?php echo "Order date: $order->dateOrderPlaced"; ?></p>
+                <h2><?php echo "Order Number: " . $order->getOrderID(); ?></h2>
+                <p><?php echo "Order date: " . $order->getDateOrderPlaced(); ?></p>
             </div>
             <div class="grid-item grid-background"></div>  
             <div class="grid-item grid-background"></div>
@@ -18,7 +18,7 @@
             <div class="grid-item grid-background"></div>  
             <div class="grid-item grid-background"></div>
             <div class="grid-item" id=lineItems>
-                <p><h3>Order details:</h3></p>
+                <h3>Order details:</h3>
                 <table>
                     <tr>
                         <th>Title</th>
@@ -31,13 +31,13 @@
                     </tr>
                     <?php foreach ($lines as $line) :  ?>
                     <tr>
-                        <td><?php echo $line->title; ?></td>
-                        <td><?php echo $line->description; ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->itemPrice/100); ?></td>
-                        <td><?php echo $line->quantity; ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->subtotal/100); ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->salesTaxApplied/100); ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->grandTotal/100); ?></td>
+                        <td><?php echo $line->getTitle(); ?></td>
+                        <td><?php echo $line->getDescription(); ?></td>
+                        <td><?php echo "£" . money_format('%i', $line->getItemPrice()/100); ?></td>
+                        <td><?php echo $line->getQuantity(); ?></td>
+                        <td><?php echo "£" . money_format('%i', $line->getSubtotal()/100); ?></td>
+                        <td><?php echo "£" . money_format('%i', $line->getSalesTaxApplied()/100); ?></td>
+                        <td><?php echo "£" . money_format('%i', $line->getGrandTotal()/100); ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <tr>
@@ -45,9 +45,9 @@
                         <th></th>
                         <th></th>
                         <th>Totals:</th>
-                        <th><?php echo "£" . money_format('%i', $order->subtotalForItems/100); ?></th>
-                        <th><?php echo "£" . money_format('%i', $order->salesTaxForItems/100); ?></th>
-                        <th><?php echo "£" . money_format('%i', $order->grandTotalForItems/100); ?></th>
+                        <th><?php echo "£" . money_format('%i', $order->getSubtotalForItems()/100); ?></th>
+                        <th><?php echo "£" . money_format('%i', $order->getSalesTaxForItems()/100); ?></th>
+                        <th><?php echo "£" . money_format('%i', $order->getGrandTotalForItems()/100); ?></th>
                     </tr>
 
                 </table>

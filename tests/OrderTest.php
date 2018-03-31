@@ -33,19 +33,19 @@ final class OrderTest extends TestCase
     public function testOrderDate(): void
     {
         $testOrder = new Order('abc-12345');
-        $this->assertInternalType('string', $testOrder->dateOrderPlaced);
-        print_r($testOrder->dateOrderPlaced);
+        $this->assertInternalType('string', $testOrder->getDateOrderPlaced());
+        print_r($testOrder->getDateOrderPlaced());
     }
     
     public function testTotalsForItems(): void
     {
         $testOrder = new Order('abc-12345');
-        $subtotals = $testOrder->subtotalForItems;
-        $tax = $testOrder->salesTaxForItems;
-        $grandTotals = $testOrder->grandTotalForItems;
+        $subtotals = $testOrder->getSubtotalForItems();
+        $tax = $testOrder->getSalesTaxForItems();
+        $grandTotals = $testOrder->getGrandTotalForItems();
         $this->assertInternalType('int', $subtotals);
         $this->assertInternalType('int', $tax);
         $this->assertInternalType('int', $grandTotals);
-        echo "\n$subtotals $tax $grandTotals";
+        print_r("\n$subtotals $tax $grandTotals");
     }
 }
