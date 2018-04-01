@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Order</title>
-        <link rel="stylesheet" href="css/order.css">
+        <link rel="stylesheet" href="/css/order.css">
     </head>
     <body>
         <div class="grid-container">
@@ -29,7 +29,8 @@
                         <th>Sales Tax</th>
                         <th>Total</th>
                     </tr>
-                    <?php foreach ($lines as $line) :  ?>
+                    <?php foreach ($lines as $line) :
+                        /* @var $line \Fred\OrderLine */ ?>
                     <tr>
                         <td><?php echo $line->getTitle(); ?></td>
                         <td><?php echo $line->getDescription(); ?></td>
@@ -45,9 +46,9 @@
                         <th></th>
                         <th></th>
                         <th>Totals:</th>
-                        <th><?php echo "£" . money_format('%i', $order->getSubtotalForItems()/100); ?></th>
-                        <th><?php echo "£" . money_format('%i', $order->getSalesTaxForItems()/100); ?></th>
-                        <th><?php echo "£" . money_format('%i', $order->getGrandTotalForItems()/100); ?></th>
+                        <th><?php echo "£" . money_format('%i', $order->getSubtotal()/100); ?></th>
+                        <th><?php echo "£" . money_format('%i', $order->getSalesTaxApplied()/100); ?></th>
+                        <th><?php echo "£" . money_format('%i', $order->getGrandTotal()/100); ?></th>
                     </tr>
 
                 </table>

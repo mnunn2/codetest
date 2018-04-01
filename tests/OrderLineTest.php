@@ -2,6 +2,7 @@
 
 namespace test;
 
+use Fred\CalcTotalsTax;
 use PHPUnit\Framework\TestCase;
 use Fred\OrderLine;
 
@@ -23,51 +24,27 @@ final class OrderLineTest extends TestCase
 
     public function testCanBeCreatedWithTestData(): void
     {
-        $this->assertInstanceOf(
-            OrderLine::class,
-            (new OrderLine($this->testData))
-        );
+        $orderLine = new OrderLine($this->testData);
+        $this->assertInstanceOf(OrderLine::class, $orderLine);
+        $this->assertInstanceOf(CalcTotalsTax::class, $orderLine);
     }
 
-    public function testItemPrice(): void
-    {
-        $oL = new OrderLine($this->testData);
-        $this->assertInternalType('int', $oL->getItemPrice());
-        $this->assertEquals($this->testData["price"], $oL->getItemPrice());
-        print_r($oL->getItemPrice() . " ");
-    }
-
-    public function testSubTotal(): void
-    {
-        $oL = new OrderLine($this->testData);
-        $price = $this->testData["price"];
-        $quant = $this->testData["quantity"];
-        $subTot = $quant * $price;
-        $this->assertInternalType('int', $oL->getSubtotal());
-        $this->assertEquals($subTot, $oL->getSubtotal());
-        print_r($oL->getSubtotal() . " ");
-    }
-
-    public function testSalesTaxApplied(): void
-    {
-        $price = $this->testData["price"];
-        $quant = $this->testData["quantity"];
-        $taxApp = (int)(($this->taxPercentage / 100) * ($price * $quant));
-        $oL = new OrderLine($this->testData);
-        $this->assertInternalType('int', $oL->getSalesTaxApplied());
-        $this->assertEquals($taxApp, $oL->getSalesTaxApplied());
-        print_r($oL->getSalesTaxApplied() . " ");
-    }
-
-    public function testGrandTotal(): void
+    public function testTotalsTax(): void
     {
         $price = $this->testData["price"];
         $quant = $this->testData["quantity"];
         $subTot = $price * $quant;
-        $grandTot = ((int)(($this->taxPercentage / 100) * $subTot)) + $subTot;
+        $taxApp = (int)(($this->taxPercentage / 100) * $subTot);
+        $grandTot = $taxApp + $subTot;
         $oL = new OrderLine($this->testData);
+        $this->assertInternalType('int', $oL->getSubtotal());
+        $this->assertInternalType('int', $oL->getSalesTaxApplied());
         $this->assertInternalType('int', $oL->getGrandTotal());
+        $this->assertEquals($subTot, $oL->getSubtotal());
+        $this->assertEquals($taxApp, $oL->getSalesTaxApplied());
         $this->assertEquals($grandTot, $oL->getGrandTotal());
+        print_r("$price  $quant " . $oL->getSubtotal() . " ");
+        print_r($oL->getSalesTaxApplied() . " ");
         print_r($oL->getGrandTotal() . " ");
     }
 }

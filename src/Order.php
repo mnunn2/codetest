@@ -6,7 +6,7 @@ namespace Fred;
  * Class Order
  * @package Fred
  */
-class Order
+class Order implements CalcTotalsTax
 {
     private $orderID = "";
     private $customerID = "";
@@ -136,7 +136,7 @@ class Order
     /**
      * @return int
      */
-    public function getSubtotalForItems(): int
+    public function getSubtotal(): int
     {
         return $this->subtotalForItems;
     }
@@ -144,7 +144,7 @@ class Order
     /**
      * @return int
      */
-    public function getSalesTaxForItems(): int
+    public function getSalesTaxApplied(): int
     {
         return $this->salesTaxForItems;
     }
@@ -152,7 +152,7 @@ class Order
     /**
      * @return int
      */
-    public function getGrandTotalForItems(): int
+    public function getGrandTotal(): int
     {
         return $this->grandTotalForItems;
     }

@@ -6,7 +6,7 @@ namespace Fred;
  * Class OrderLine
  * @package Fred
  */
-class OrderLine
+class OrderLine implements CalcTotalsTax
 {
     private $orderID = "";
     private $orderDate = "";

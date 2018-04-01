@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use Fred\Order;
 
-setlocale(LC_MONETARY, 'en_UK');
+setlocale(LC_MONETARY, 'en_GB');
 
 $orderNumber = 'fyi-12346'; // sourced from sanitized user input
 try {

@@ -2,6 +2,7 @@
 
 namespace test;
 
+use Fred\CalcTotalsTax;
 use PHPUnit\Framework\TestCase;
 use Fred\Order;
 
@@ -10,15 +11,15 @@ final class OrderTest extends TestCase
     public function testCannotBeCreatedWithInvalidOrderID(): void
     {
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Invalid order number");
         (new Order("invalid"));
     }
 
     public function testCanBeCreatedFromValidOrderID(): void
     {
-        $this->assertInstanceOf(
-            Order::class,
-            (new Order('abc-12345'))
-        );
+        $order = new Order('abc-12345');
+        $this->assertInstanceOf(Order::class, $order);
+        $this->assertInstanceOf(CalcTotalsTax::class, $order);
     }
     
     public function testGetOrderLines(): void
@@ -40,9 +41,9 @@ final class OrderTest extends TestCase
     public function testTotalsForItems(): void
     {
         $testOrder = new Order('abc-12345');
-        $subtotals = $testOrder->getSubtotalForItems();
-        $tax = $testOrder->getSalesTaxForItems();
-        $grandTotals = $testOrder->getGrandTotalForItems();
+        $subtotals = $testOrder->getSubtotal();
+        $tax = $testOrder->getSalesTaxApplied();
+        $grandTotals = $testOrder->getGrandTotal();
         $this->assertInternalType('int', $subtotals);
         $this->assertInternalType('int', $tax);
         $this->assertInternalType('int', $grandTotals);
