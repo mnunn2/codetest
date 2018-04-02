@@ -6,6 +6,7 @@ namespace Fred;
 /**
  * Class Order
  * @package Fred
+ * @method int Order getSubtotal()
  */
 class Order implements CalcInterface
 {

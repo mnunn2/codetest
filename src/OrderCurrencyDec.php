@@ -23,7 +23,7 @@ class OrderCurrencyDec
 
     /**
      * OrderCurrencyDec constructor.
-     * @param $order
+     * @param Order
      */
     public function __construct($order)
     {
@@ -35,7 +35,8 @@ class OrderCurrencyDec
      */
     public function subtotalCurrency(): string
     {
-        return $this->currencyFmt((float) $this->orderObj->getSubtotal());
+        /** @noinspection PhpUndefinedMethodInspection */
+        return $this->currencyFmt((float)$this->orderObj->getSubtotal());
     }
 
     /**
@@ -43,6 +44,7 @@ class OrderCurrencyDec
      */
     public function salesTaxAppliedCurrency(): string
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         return $this->currencyFmt((float) $this->orderObj->getSalesTaxApplied());
     }
 
@@ -51,6 +53,7 @@ class OrderCurrencyDec
      */
     public function grandTotalCurrency(): string
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         return $this->currencyFmt((float) $this->orderObj->getGrandTotal());
     }
 

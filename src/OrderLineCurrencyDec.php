@@ -24,6 +24,7 @@ class OrderLineCurrencyDec extends OrderCurrencyDec
      */
     public function itemPriceCurrency(): string
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         return $this->currencyFmt((float) $this->orderObj->getItemPrice());
     }
 }
