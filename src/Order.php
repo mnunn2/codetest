@@ -2,11 +2,12 @@
 
 namespace Fred;
 
+
 /**
  * Class Order
  * @package Fred
  */
-class Order implements CalcTotalsTax
+class Order implements CalcInterface
 {
     private $orderID = "";
     private $customerID = "";
@@ -24,7 +25,6 @@ class Order implements CalcTotalsTax
     public function __construct(string $orderID)
     {
         $orderIDMatchPattern = '/^[a-zA-Z]{3}-[0-9]{5}$/';
-        $salesTaxPercentage = 20; // suggest get from config
 
         if (preg_match($orderIDMatchPattern, $orderID)) {
             $this->orderID = $orderID;
@@ -36,7 +36,7 @@ class Order implements CalcTotalsTax
 
         $this->setOrderDate();
         $this->setSubtotalForItems();
-        $this->salesTaxForItems = (int) (($salesTaxPercentage /100) * $this->subtotalForItems);
+        $this->salesTaxForItems = TaxCalc::calcTax($this->subtotalForItems);
         $this->grandTotalForItems = $this->subtotalForItems + $this->salesTaxForItems;
     }
 
@@ -52,7 +52,7 @@ class Order implements CalcTotalsTax
     {
         $orderLineDataArray = $this->getOrderLineDataFromDataSource();
         foreach ($orderLineDataArray as $line) {
-            $this->orderLines[] = new OrderLine($line);
+            $this->orderLines[] = new OrderLineCurrencyDec(new OrderLine($line));
         }
     }
 
@@ -102,7 +102,7 @@ class Order implements CalcTotalsTax
                 "orderDate" => "2018-03-15 10:23:00",
                 "title" => "Drawing pad",
                 "description" => "A4 ruled",
-                "price" => 210,
+                "price" => 201,
                 "quantity" => 4
             )
         );

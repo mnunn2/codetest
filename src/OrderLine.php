@@ -6,7 +6,7 @@ namespace Fred;
  * Class OrderLine
  * @package Fred
  */
-class OrderLine implements CalcTotalsTax
+class OrderLine implements CalcInterface
 {
     private $orderID = "";
     private $orderDate = "";
@@ -25,7 +25,6 @@ class OrderLine implements CalcTotalsTax
      */
     public function __construct(array $orderLine)
     {
-        $salesTaxPercentage = 20; // suggest get from config
 
         $this->orderID = $orderLine['orderID'];
         $this->orderDate = $orderLine['orderDate'];
@@ -36,7 +35,7 @@ class OrderLine implements CalcTotalsTax
         $this->quantity = $orderLine['quantity'];
 
         $this->subtotal = $this->itemPrice * $this->quantity;
-        $this->salesTaxApplied = (int) (($salesTaxPercentage /100) * $this->subtotal);
+        $this->salesTaxApplied = TaxCalc::calcTax($this->subtotal);
         $this->grandTotal = $this->subtotal + $this->salesTaxApplied;
     }
 

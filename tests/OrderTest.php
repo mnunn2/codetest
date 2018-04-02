@@ -2,9 +2,10 @@
 
 namespace test;
 
-use Fred\CalcTotalsTax;
 use PHPUnit\Framework\TestCase;
+use Fred\CalcInterface;
 use Fred\Order;
+use Fred\OrderCurrencyDec;
 
 final class OrderTest extends TestCase
 {
@@ -19,7 +20,7 @@ final class OrderTest extends TestCase
     {
         $order = new Order('abc-12345');
         $this->assertInstanceOf(Order::class, $order);
-        $this->assertInstanceOf(CalcTotalsTax::class, $order);
+        $this->assertInstanceOf(CalcInterface::class, $order);
     }
     
     public function testGetOrderLines(): void
@@ -27,7 +28,7 @@ final class OrderTest extends TestCase
         $testOrder = new Order('abc-12345');
         $orderLines = $testOrder->getOrderLines();
         $this->assertInternalType('array', $orderLines);
-        $this->assertInstanceOf('Fred\OrderLine', $orderLines[0]);
+        $this->assertInstanceOf('Fred\OrderLineCurrencyDec', $orderLines[0]);
         print_r($orderLines[0]);
     }
     
@@ -47,6 +48,15 @@ final class OrderTest extends TestCase
         $this->assertInternalType('int', $subtotals);
         $this->assertInternalType('int', $tax);
         $this->assertInternalType('int', $grandTotals);
-        print_r("\n$subtotals $tax $grandTotals");
+        print_r("\n$subtotals $tax $grandTotals\n");
     }
+
+    public function testDecoratorCanBeCreatedWithTestData(): void
+    {
+        $order = new OrderCurrencyDec(new Order("abc-12345"));
+        $this->assertInstanceOf(OrderCurrencyDec::class, $order);
+        print_r($order->subtotalCurrency() . " ");
+        print_r($order->getGrandTotal() . " ");
+    }
+
 }

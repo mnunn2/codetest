@@ -11,7 +11,7 @@ namespace Fred;
  * Interface calcTotalsTax
  * @package Fred
  */
-interface CalcTotalsTax
+interface CalcInterface
 {
     /**
      * @return int
