@@ -34,11 +34,11 @@
                     <tr>
                         <td><?php echo $line->getTitle(); ?></td>
                         <td><?php echo $line->getDescription(); ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->getItemPrice()/100); ?></td>
+                        <td><?php echo $line->itemPriceCurrency(); ?></td>
                         <td><?php echo $line->getQuantity(); ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->getSubtotal()/100); ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->getSalesTaxApplied()/100); ?></td>
-                        <td><?php echo "£" . money_format('%i', $line->getGrandTotal()/100); ?></td>
+                        <td><?php echo $line->subtotalCurrency(); ?></td>
+                        <td><?php echo $line->salesTaxAppliedCurrency(); ?></td>
+                        <td><?php echo $line->grandTotalCurrency(); ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <tr>
@@ -46,9 +46,9 @@
                         <th></th>
                         <th></th>
                         <th>Totals:</th>
-                        <th><?php echo "£" . money_format('%i', $order->getSubtotal()/100); ?></th>
-                        <th><?php echo "£" . money_format('%i', $order->getSalesTaxApplied()/100); ?></th>
-                        <th><?php echo "£" . money_format('%i', $order->getGrandTotal()/100); ?></th>
+                        <th><?php echo $order->subtotalCurrency(); ?></th>
+                        <th><?php echo $order->salesTaxAppliedCurrency(); ?></th>
+                        <th><?php echo $order->grandTotalCurrency(); ?></th>
                     </tr>
 
                 </table>

@@ -2,9 +2,10 @@
 
 namespace test;
 
-use Fred\CalcTotalsTax;
 use PHPUnit\Framework\TestCase;
+use Fred\CalcInterface;
 use Fred\OrderLine;
+use Fred\OrderLineCurrencyDec;
 
 /**
  * Class OrderLineTest
@@ -17,8 +18,8 @@ final class OrderLineTest extends TestCase
                 "orderDate" => "2018-03-15 10:20:00",
                 "title" => "Cup",
                 "description" => "White Cup",
-                "price" => 353,
-                "quantity" => 2
+                "price" => 201,
+                "quantity" => 4
             );
     public $taxPercentage = 20; // suggest from config
 
@@ -26,7 +27,7 @@ final class OrderLineTest extends TestCase
     {
         $orderLine = new OrderLine($this->testData);
         $this->assertInstanceOf(OrderLine::class, $orderLine);
-        $this->assertInstanceOf(CalcTotalsTax::class, $orderLine);
+        $this->assertInstanceOf(CalcInterface::class, $orderLine);
     }
 
     public function testTotalsTax(): void
@@ -34,7 +35,7 @@ final class OrderLineTest extends TestCase
         $price = $this->testData["price"];
         $quant = $this->testData["quantity"];
         $subTot = $price * $quant;
-        $taxApp = (int)(($this->taxPercentage / 100) * $subTot);
+        $taxApp = (int)(round(($this->taxPercentage / 100) * $subTot));
         $grandTot = $taxApp + $subTot;
         $oL = new OrderLine($this->testData);
         $this->assertInternalType('int', $oL->getSubtotal());
@@ -45,6 +46,14 @@ final class OrderLineTest extends TestCase
         $this->assertEquals($grandTot, $oL->getGrandTotal());
         print_r("$price  $quant " . $oL->getSubtotal() . " ");
         print_r($oL->getSalesTaxApplied() . " ");
-        print_r($oL->getGrandTotal() . " ");
+        print_r($oL->getGrandTotal() . "\n");
+    }
+
+    public function testDecoratorCanBeCreatedWithTestData(): void
+    {
+        $oL = new OrderLineCurrencyDec(new OrderLine($this->testData));
+        $this->assertInstanceOf(OrderLineCurrencyDec::class, $oL);
+        print_r($oL->getItemPrice() . " ");
+        print_r($oL->itemPriceCurrency());
     }
 }
