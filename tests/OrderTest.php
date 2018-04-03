@@ -29,7 +29,17 @@ final class OrderTest extends TestCase
         $orderLines = $testOrder->getOrderLines();
         $this->assertInternalType('array', $orderLines);
         $this->assertInstanceOf('Fred\OrderLineCurrencyDec', $orderLines[0]);
-        print_r($orderLines[0]);
+    }
+
+    public function testSumOfOrderLineGrandTotalsEqualsOrderGrandTotal(): void
+    {
+        $orderLineGrandTotals = [];
+        $testOrder = new Order('abc-12345');
+        $orderLines = $testOrder->getOrderLines();
+        foreach ($orderLines as $line){
+            $orderLineGrandTotals[] = $line->getGrandTotal();
+        }
+        $this->assertEquals(array_sum( $orderLineGrandTotals ), $testOrder->getGrandTotal());
     }
     
     public function testOrderDate(): void
