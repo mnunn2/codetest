@@ -39,7 +39,7 @@ class OrderLine extends OrderBase
      */
     public function itemPriceCurrency(): string
     {
-        return $this->currencyFmt((float)$this->itemPrice);
+        return $this->currencyFmt($this->itemPrice);
     }
 
     /**

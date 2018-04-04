@@ -33,9 +33,9 @@ class OrderBase
      * @param float $amount
      * @return string
      */
-    protected function currencyFmt(float $amount): string
+    protected function currencyFmt(int $amount): string
     {
-        return "&pound;" . number_format($amount / 100, 2);
+        return "&pound;" . number_format((float)$amount / 100, 2);
     }
 
     /**
@@ -43,7 +43,7 @@ class OrderBase
      */
     public function subtotalCurrency(): string
     {
-        return $this->currencyFmt((float)$this->subtotal);
+        return $this->currencyFmt($this->subtotal);
     }
 
     /**
@@ -51,7 +51,7 @@ class OrderBase
      */
     public function salesTaxAppliedCurrency(): string
     {
-        return $this->currencyFmt((float)$this->salesTaxApplied);
+        return $this->currencyFmt($this->salesTaxApplied);
     }
 
     /**
@@ -59,7 +59,7 @@ class OrderBase
      */
     public function grandTotalCurrency(): string
     {
-        return $this->currencyFmt((float)$this->grandTotal);
+        return $this->currencyFmt($this->grandTotal);
     }
 
     /**
