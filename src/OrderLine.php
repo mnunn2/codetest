@@ -6,7 +6,7 @@ namespace Fred;
  * Class OrderLine
  * @package Fred
  */
-class OrderLine implements CalcInterface
+class OrderLine extends OrderBase
 {
     private $orderID = "";
     private $orderDate = "";
@@ -15,10 +15,6 @@ class OrderLine implements CalcInterface
     private $description = "";
     private $itemPrice = 0;
     private $quantity = 0;
-    private $subtotal = 0;
-    private $salesTaxApplied = 0;
-    private $grandTotal = 0;
-
     /**
      * OrderLine constructor.
      * @param array $orderLine
@@ -35,32 +31,7 @@ class OrderLine implements CalcInterface
         $this->quantity = $orderLine['quantity'];
 
         $this->subtotal = $this->itemPrice * $this->quantity;
-        $this->salesTaxApplied = TaxCalc::calcTax($this->subtotal);
-        $this->grandTotal = $this->subtotal + $this->salesTaxApplied;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSubtotal(): int
-    {
-        return $this->subtotal;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSalesTaxApplied(): int
-    {
-        return $this->salesTaxApplied;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGrandTotal(): int
-    {
-        return $this->grandTotal;
+        parent::__construct();
     }
 
     /**

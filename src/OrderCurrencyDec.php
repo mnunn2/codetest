@@ -45,7 +45,7 @@ class OrderCurrencyDec
     public function salesTaxAppliedCurrency(): string
     {
         /** @noinspection PhpUndefinedMethodInspection */
-        return $this->currencyFmt((float) $this->orderObj->getSalesTaxApplied());
+        return $this->currencyFmt((float)$this->orderObj->getSalesTaxApplied());
     }
 
     /**
@@ -54,7 +54,7 @@ class OrderCurrencyDec
     public function grandTotalCurrency(): string
     {
         /** @noinspection PhpUndefinedMethodInspection */
-        return $this->currencyFmt((float) $this->orderObj->getGrandTotal());
+        return $this->currencyFmt((float)$this->orderObj->getGrandTotal());
     }
 
     /**

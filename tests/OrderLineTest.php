@@ -2,6 +2,7 @@
 
 namespace test;
 
+use Fred\OrderBase;
 use PHPUnit\Framework\TestCase;
 use Fred\CalcInterface;
 use Fred\OrderLine;
@@ -27,7 +28,7 @@ final class OrderLineTest extends TestCase
     {
         $orderLine = new OrderLine($this->testData);
         $this->assertInstanceOf(OrderLine::class, $orderLine);
-        $this->assertInstanceOf(CalcInterface::class, $orderLine);
+        $this->assertInstanceOf(OrderBase::class, $orderLine);
     }
 
     public function testTotalsTax(): void

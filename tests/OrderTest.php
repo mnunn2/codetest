@@ -2,6 +2,7 @@
 
 namespace test;
 
+use Fred\OrderBase;
 use PHPUnit\Framework\TestCase;
 use Fred\CalcInterface;
 use Fred\Order;
@@ -20,7 +21,7 @@ final class OrderTest extends TestCase
     {
         $order = new Order('abc-12345');
         $this->assertInstanceOf(Order::class, $order);
-        $this->assertInstanceOf(CalcInterface::class, $order);
+        $this->assertInstanceOf(OrderBase::class, $order);
     }
     
     public function testGetOrderLines(): void

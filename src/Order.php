@@ -6,16 +6,12 @@ namespace Fred;
 /**
  * Class Order
  * @package Fred
- * @method int Order getSubtotal()
  */
-class Order implements CalcInterface
+class Order extends OrderBase
 {
     private $orderID = "";
     private $customerID = "";
     private $dateOrderPlaced = "";
-    private $subtotalForItems = 0;
-    private $salesTaxForItems = 0;
-    private $grandTotalForItems = 0;
     private $orderLines = []; //array of order line objects
 
     /**
@@ -36,10 +32,10 @@ class Order implements CalcInterface
         }
 
         $this->setOrderDate();
-        $this->setSubtotalForItems();
-        $this->salesTaxForItems = TaxCalc::calcTax($this->subtotalForItems);
-        $this->grandTotalForItems = $this->subtotalForItems + $this->salesTaxForItems;
+        $this->setSubtotal();
+        parent::__construct();
     }
+
 
     /**
      * @return array
@@ -57,11 +53,11 @@ class Order implements CalcInterface
         }
     }
 
-    private function setSubtotalForItems(): void
+    private function setSubtotal(): void
     {
         foreach ($this->orderLines as $line) {
             $itemsSubtotals[] = $line->getSubtotal();
-            $this->subtotalForItems = array_sum($itemsSubtotals);
+            $this->subtotal = array_sum($itemsSubtotals);
         }
     }
 
@@ -133,30 +129,4 @@ class Order implements CalcInterface
     {
         return $this->dateOrderPlaced;
     }
-
-    /**
-     * @return int
-     */
-    public function getSubtotal(): int
-    {
-        return $this->subtotalForItems;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSalesTaxApplied(): int
-    {
-        return $this->salesTaxForItems;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGrandTotal(): int
-    {
-        return $this->grandTotalForItems;
-    }
-
-
 }
