@@ -49,7 +49,7 @@ class Order extends OrderBase
     {
         $orderLineDataArray = $this->getOrderLineDataFromDataSource();
         foreach ($orderLineDataArray as $line) {
-            $this->orderLines[] = new OrderLineCurrencyDec(new OrderLine($line));
+            $this->orderLines[] = new OrderLine($line);
         }
     }
 

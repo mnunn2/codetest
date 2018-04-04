@@ -29,7 +29,7 @@ final class OrderTest extends TestCase
         $testOrder = new Order('abc-12345');
         $orderLines = $testOrder->getOrderLines();
         $this->assertInternalType('array', $orderLines);
-        $this->assertInstanceOf('Fred\OrderLineCurrencyDec', $orderLines[0]);
+        $this->assertInstanceOf('Fred\OrderLine', $orderLines[0]);
     }
 
     public function testSumOfOrderLineGrandTotalsEqualsOrderGrandTotal(): void
@@ -62,12 +62,15 @@ final class OrderTest extends TestCase
         print_r("\n$subtotals $tax $grandTotals\n");
     }
 
-    public function testDecoratorCanBeCreatedWithTestData(): void
+    public function testCurrencyForItems(): void
     {
-        $order = new OrderCurrencyDec(new Order("abc-12345"));
-        $this->assertInstanceOf(OrderCurrencyDec::class, $order);
-        print_r($order->subtotalCurrency() . " ");
-        print_r($order->getGrandTotal() . " ");
+        $testOrder = new Order('abc-12345');
+        $subtotals = $testOrder->subtotalCurrency();
+        $tax = $testOrder->salesTaxAppliedCurrency();
+        $grandTotals = $testOrder->grandTotalCurrency();
+        $this->assertInternalType('string', $subtotals);
+        $this->assertInternalType('string', $tax);
+        $this->assertInternalType('string', $grandTotals);
+        print_r("\n$subtotals $tax $grandTotals\n");
     }
-
 }

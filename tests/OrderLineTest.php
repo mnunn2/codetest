@@ -49,12 +49,11 @@ final class OrderLineTest extends TestCase
         print_r($oL->getSalesTaxApplied() . " ");
         print_r($oL->getGrandTotal() . "\n");
     }
-
-    public function testDecoratorCanBeCreatedWithTestData(): void
+    public function testCurrencyForItems(): void
     {
-        $oL = new OrderLineCurrencyDec(new OrderLine($this->testData));
-        $this->assertInstanceOf(OrderLineCurrencyDec::class, $oL);
-        print_r($oL->getItemPrice() . " ");
-        print_r($oL->itemPriceCurrency());
+        $orderLine = new OrderLine($this->testData);
+        $itemPrice = $orderLine->itemPriceCurrency();
+        $this->assertInternalType('string', $itemPrice);
+        print_r("\n$itemPrice\n");
     }
 }

@@ -30,6 +30,39 @@ class OrderBase
     }
 
     /**
+     * @param float $amount
+     * @return string
+     */
+    protected function currencyFmt(float $amount): string
+    {
+        return "&pound;" . number_format($amount / 100, 2);
+    }
+
+    /**
+     * @return string
+     */
+    public function subtotalCurrency(): string
+    {
+        return $this->currencyFmt((float)$this->subtotal);
+    }
+
+    /**
+     * @return string
+     */
+    public function salesTaxAppliedCurrency(): string
+    {
+        return $this->currencyFmt((float)$this->salesTaxApplied);
+    }
+
+    /**
+     * @return string
+     */
+    public function grandTotalCurrency(): string
+    {
+        return $this->currencyFmt((float)$this->grandTotal);
+    }
+
+    /**
      * @return int
      */
     public function getSubtotal(): int

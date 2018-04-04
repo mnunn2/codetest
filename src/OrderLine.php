@@ -35,6 +35,14 @@ class OrderLine extends OrderBase
     }
 
     /**
+     * @return string
+     */
+    public function itemPriceCurrency(): string
+    {
+        return $this->currencyFmt((float)$this->itemPrice);
+    }
+
+    /**
      * @return int
      */
     public function getQuantity(): int
