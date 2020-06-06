@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 
 use Fred\Order;
 use Fred\OrderCurrencyDec;
-
+// i was added in a
 $orderNumber = 'fyi-12346'; // sourced from sanitized user input
 try {
     $order = new Order($orderNumber);
