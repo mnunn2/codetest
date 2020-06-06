@@ -12,7 +12,7 @@ try {
     $lines = $order->getOrderLines();
     require 'view/order_view.php';
 }
-catch(Exception $e) {
+catch(Exception $e) { // added in b
   echo 'Message: ' . $e->getMessage();
 }
 // i was later added in b
