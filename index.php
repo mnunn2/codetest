@@ -11,5 +11,5 @@ try {
     require 'view/order_view.php';
 }
 catch(Exception $e) { // added in b
-  echo 'Messages: ' . $e->getMessage();
+  echo 'Messagesss: ' . $e->getMessage();
 }
