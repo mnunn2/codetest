@@ -2,6 +2,7 @@
 
 require 'vendor/autoload.php';
 
+// first, fiexed a typo
 use Fred\Order;
 use Fred\OrderCurrencyDec;
 $orderNumber = 'fyi-12346'; // sourced from sanitized user input
