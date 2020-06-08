@@ -11,6 +11,7 @@ try {
     $lines = $order->getOrderLines();
     require 'view/order_view.php';
 }
+// added comment from master
 catch(Exception $e) { // added in b
   echo 'Messagesss: ' . $e->getMessage();
 }
